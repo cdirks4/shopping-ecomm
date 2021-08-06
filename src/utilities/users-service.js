@@ -39,3 +39,7 @@ export async function getUser() {
 	console.log(token);
 	return token ? JSON.parse(atob(token.split('.')[1])).user : null;
 }
+
+export function logout() {
+	localStorage.removeItem('token');
+}

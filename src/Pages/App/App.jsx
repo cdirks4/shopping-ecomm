@@ -5,11 +5,13 @@ import { getUser } from '../../utilities/users-service';
 import SignupPage from '../SignupPage/SignupPage';
 import { Route } from 'react-router-dom';
 import LoginPage from '../LoginPage/LoginPage';
+import NavBar from '../../Components/Navbar/Navbar';
 
 const App = () => {
 	const [user, setUser] = useState(getUser());
 	return (
 		<div>
+			<NavBar />
 			<Route path='/signup'>
 				<SignupPage setUser={setUser} />
 			</Route>
