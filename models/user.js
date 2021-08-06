@@ -6,7 +6,7 @@ const SALT_ROUNDS = 11;
 
 const userSchema = new Schema(
 	{
-		name: { type: String, requires: true },
+		name: { type: String, required: true },
 		email: {
 			type: String,
 			unique: true,
@@ -31,3 +31,5 @@ const userSchema = new Schema(
 		},
 	}
 );
+
+module.exports = mongoose.model('User', userSchema);
