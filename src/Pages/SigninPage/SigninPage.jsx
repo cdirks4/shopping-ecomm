@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
-
-const LoginPage = () => {
-	const [user, setUser] = useState({});
-
+import * as usersService from '../../utilities/users-service';
+import { useHistory } from 'react-router-dom';
+const LoginPage = ({ setUser }) => {
+	const [credentials, setCredentials] = useState({});
+	const history = useHistory();
 	const handleChange = (e) => {
-		setUser({ ...user, [e.target.id]: e.target.value });
+		setCredentials({ ...credentials, [e.target.id]: e.target.value });
 	};
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		return null;
+		try {
+			const user = await usersService.signup(credentials);
+			setUser(user);
+			history.push('/');
+		} catch (err) {
+			console.log(err);
+		}
 	};
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>
-				<label for='name'>
+				<label htmlFor='name'>
 					Name:
 					<input
 						id='name'
@@ -22,7 +29,7 @@ const LoginPage = () => {
 						onChange={handleChange}
 					/>
 				</label>
-				<label for='email'>
+				<label htmlFor='email'>
 					Email:
 					<input
 						id='email'
@@ -31,7 +38,7 @@ const LoginPage = () => {
 						onChange={handleChange}
 					/>
 				</label>
-				<label for='password'>
+				<label htmlFor='password'>
 					Password:
 					<input
 						id='password'
@@ -40,6 +47,7 @@ const LoginPage = () => {
 						onChange={handleChange}
 					/>
 				</label>
+				<button type='submit'>Sumbit</button>
 			</form>
 		</div>
 	);
