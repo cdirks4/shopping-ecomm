@@ -6,6 +6,7 @@ module.exports = {
 	create,
 	index,
 	login,
+	update,
 };
 
 async function index(req, res) {
@@ -31,9 +32,7 @@ async function create(req, res) {
 
 async function login(req, res) {
 	try {
-		console.log('hi');
 		const user = await User.findOne({ email: req.body.email });
-		console.log(user);
 		if (!user) throw new Error('No user with corresonding email');
 		const match = await bcrypt.compare(req.body.password, user.password);
 		if (match) {
@@ -47,7 +46,23 @@ async function login(req, res) {
 	}
 }
 
-async function update(req, res) {}
+async function update(req, res) {
+	try {
+		const user = await User.findOne({ email: req.body.email });
+		if (!user) throw new Error('No user with corresonding email');
+		const match = await bcrypt.compare(req.body.password, user.password);
+		console.log(match);
+		if (match) {
+			req.body.newName && (user.name = req.body.newName);
+			req.body.newEmail && (user.email = req.body.newEmail);
+			req.body.newPassword && (user.password = req.body.newPassword);
+			user.save();
+			res.json(user);
+		} else {
+			throw new Error('password did not match the username');
+		}
+	} catch (err) {}
+}
 
 function createJWT(user) {
 	return jwt.sign(
