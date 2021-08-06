@@ -9,7 +9,15 @@ export async function signup(userData) {
 		return err;
 	}
 }
-
+export async function login(credentials) {
+	try {
+		const token = await usersAPI.login(credentials);
+		localStorage.setItem('token', token);
+		return getUser();
+	} catch (err) {
+		return err;
+	}
+}
 export async function getToken() {
 	// getItem returns null if there's no string
 	const token = await localStorage.getItem('token');
