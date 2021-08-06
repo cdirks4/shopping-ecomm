@@ -4,7 +4,18 @@ const bcrypt = require('bcrypt');
 
 module.exports = {
 	create,
+	index,
 };
+
+async function index(req, res) {
+	try {
+		const users = await User.find({});
+		console.log(users);
+		res.json(users);
+	} catch (err) {
+		res.json(err);
+	}
+}
 
 async function create(req, res) {
 	try {
