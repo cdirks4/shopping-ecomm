@@ -19,6 +19,19 @@ const LoginPage = ({ setUser }) => {
 			console.log(err);
 		}
 	};
+	const request = require('request');
+
+	const options = {
+		method: 'GET',
+		url: 'https://taobao-api.p.rapidapi.com/api',
+		qs: { api: 'item_search', page_size: '40', sort: 'default', q: 'shoes' },
+		headers: {
+			'x-rapidapi-host': 'taobao-api.p.rapidapi.com',
+			'x-rapidapi-key': 'b2c09a7168msh24741691bdefa5cp1b0f38jsnccede08efa52',
+			useQueryString: true,
+		},
+	};
+
 	return (
 		<div>
 			<div>
