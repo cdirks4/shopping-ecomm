@@ -62,7 +62,9 @@ async function update(req, res) {
 		} else {
 			throw new Error('password did not match the username');
 		}
-	} catch (err) {}
+	} catch (err) {
+		res.json(err);
+	}
 }
 
 function createJWT(user) {
