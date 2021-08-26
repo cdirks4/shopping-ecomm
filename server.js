@@ -11,8 +11,8 @@ require('./config/database');
 app.use(logger('dev'));
 app.use(express.json());
 
-app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
-app.use(express.static(path.join(__dirname, 'build')));
+// app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
+// app.use(express.static(path.join(__dirname, 'build')));
 
 app.use(require('./config/checkToken'));
 
@@ -20,9 +20,9 @@ app.use('/api/users', require('./routes/api/users'));
 
 /// sending to front-end if no route is hit
 
-app.get('/*', function (req, res) {
-	res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+// app.get('/*', function (req, res) {
+// 	res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
 
 const port = process.env.PORT | 3001;
 
