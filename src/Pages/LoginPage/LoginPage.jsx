@@ -19,7 +19,6 @@ const LoginPage = ({ setUser }) => {
 			console.log(err);
 		}
 	};
-	const request = require('request');
 
 	const options = {
 		method: 'GET',
